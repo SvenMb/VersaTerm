@@ -356,7 +356,7 @@ static int user_font_view_fn(const struct MenuItemStruct *item, int callType, in
 static int user_font_graphics_mapping_fn(const struct MenuItemStruct *item, int callType, int row, int col);
 static int user_font_name_fn(const struct MenuItemStruct *item, int callType, int row, int col);
 static int bell_test_fn(const struct MenuItemStruct *item, int callType, int row, int col);
-static int displaytype_fn(const struct MenuItemStruct *item, int callType, int row, int col);
+// static int displaytype_fn(const struct MenuItemStruct *item, int callType, int row, int col);
 static int usbtype_fn(const struct MenuItemStruct *item, int callType, int row, int col);
 
 
@@ -367,8 +367,8 @@ static const struct MenuItemStruct __in_flash(".configmenus") serialMenu[] =
      {'4', "Stop bits",           0, NULL, 0, NULL, &settings.Serial.stopbits, 1,  2, 1, 1},
      {'5', "RTS control line",    0, NULL, 0, NULL, &settings.Serial.rtsmode,   0,  2, 1, 0, {"Always assert (always low)", "Never assert (always high)", "Assert when ready to receive"}},
      {'6', "CTS control line",    0, NULL, 0, NULL, &settings.Serial.ctsmode,   0,  1, 1, 0, {"Ignore", "Only send data if asserted"}},
-     {'7', "XOn/XOff control",    0, NULL, 0, NULL, &settings.Serial.xonxoff,   0,  2, 1, 0, {"Disabled", "Enabled", "Enabled and FIFOs disabled"}},
-     {'8', "LED blink time (ms)", 0, NULL, 0, NULL, &settings.Serial.blink,    0,  1000, 25, 50}};
+     {'7', "XOn/XOff control",    0, NULL, 0, NULL, &settings.Serial.xonxoff,   0,  2, 1, 0, {"Disabled", "Enabled", "Enabled and FIFOs disabled"}}};
+//     {'8', "LED blink time (ms)", 0, NULL, 0, NULL, &settings.Serial.blink,    0,  1000, 25, 50}};
 
 
 static const struct MenuItemStruct __in_flash(".configmenus") bellMenu[] =
@@ -455,7 +455,8 @@ static const struct MenuItemStruct __in_flash(".configmenus") screenPetsciiColor
 
 
 static const struct MenuItemStruct __in_flash(".configmenus") screenMenu[] =
-    {{'1', "Display type",               0, NULL, 0, displaytype_fn, &settings.Screen.display,  0,   2, 1,  0, {"Auto-detect", "DVI/HDMI", "VGA"}},
+    // {{'1', "Display type",               0, NULL, 0, displaytype_fn, &settings.Screen.display,  0,   0, 1,  0, {"DVI/HDMI"}},
+    {{'1', "Display type",               0, NULL, 0, NULL, &settings.Screen.display,  0,   0, 1,  0, {"DVI/HDMI"}},
      {'2', "Rows",                       0, NULL, 0, NULL, &settings.Screen.rows,    10,  60, 1, 30},
      {'3', "Columns",                    0, NULL, 0, NULL, &settings.Screen.cols,    20,  80, 2, 80},
      {'4', "Double size characters",     0, NULL, 0, NULL, &settings.Screen.dblchars, 0,   1, 1,  1, {"never", "if screen space allows"}},
@@ -485,7 +486,7 @@ static const struct MenuItemStruct __in_flash(".configmenus") fontMenu[] =
 
 
 static const struct MenuItemStruct __in_flash(".configmenus") usbMenu[] =
-    {{'1', "USB port mode",  0, NULL, 0, usbtype_fn, &settings.USB.mode,   0, 3, 1, 3, {"Disabled", "Device", "Host", "Auto-detect"}},
+    {{'1', "USB port mode",  0, NULL, 0, usbtype_fn, &settings.USB.mode,   0, 2, 1, 2, {"Disabled", "Device", "Host"}},
      {'2', "USB CDC device mode", 0, NULL, 0, NULL, &settings.USB.cdcmode, 0, 3, 1, 2, {"Disabled", "Serial", "Pass-through", "Pass-through (terminal disabled)"}}};
 
 
@@ -508,26 +509,24 @@ static uint16_t get_current_usbmode()
 //  if( settings.USB.mode==CFG_USBMODE_AUTODETECT )
 //    {
 //      if( tuh_inited() )
-        return CFG_USBMODE_HOST;
+//        return CFG_USBMODE_HOST;
 //      else if( tud_inited() )
 //        return CFG_USBMODE_DEVICE;
 //      else
 //        return CFG_USBMODE_OFF;
 //    }
 //  else
-//    return settings.USB.mode;
+    return settings.USB.mode;
 }
 
 
-static uint16_t get_current_displaytype()
-{
+// static uint16_t get_current_displaytype()
+// {
 //  if( settings.Screen.display==CFG_DISPTYPE_AUTODETECT )
 //    return framebuf_is_dvi() ? CFG_DISPTYPE_DVI : CFG_DISPTYPE_VGA;
 //  else
 //    return settings.Screen.display;
-    return CFG_DISPTYPE_DVI;
-}
-
+// }
 
 static uint16_t get_keyboard_repeat_rate_mHz(uint8_t rate)
 {
@@ -2023,21 +2022,21 @@ static int INFLASHFUN bell_test_fn(const struct MenuItemStruct *item, int callTy
 }
 
 
-static int INFLASHFUN displaytype_fn(const struct MenuItemStruct *item, int callType, int row, int col)
-{
-  int res = 0;
-
-  if( callType==IFT_QUERY )
-    res = IFT_PRINT;
-  else if( callType==IFT_PRINT )
-    {
-      print("%s", item->valueLabels[settings.Screen.display]);
-      if( settings.Screen.display==0 )
-        print(" (currently %s)", item->valueLabels[get_current_displaytype()]);
-    }
-  
-  return res;
-}
+// static int INFLASHFUN displaytype_fn(const struct MenuItemStruct *item, int callType, int row, int col)
+// {
+//   int res = 0;
+//
+//   if( callType==IFT_QUERY )
+//     res = IFT_PRINT;
+//   else if( callType==IFT_PRINT )
+//     {
+//       print("%s", item->valueLabels[settings.Screen.display]);
+//       if( settings.Screen.display==0 )
+//         print(" (currently %s)", item->valueLabels[get_current_displaytype()]);
+//     }
+//   
+//   return res;
+// }
 
 
 static int usbtype_fn(const struct MenuItemStruct *item, int callType, int row, int col)
@@ -2049,8 +2048,8 @@ static int usbtype_fn(const struct MenuItemStruct *item, int callType, int row, 
   else if( callType==IFT_PRINT )
     {
       print("%s", item->valueLabels[settings.USB.mode]);
-      if( settings.USB.mode==CFG_USBMODE_AUTODETECT )
-        print(" (currently %s)", item->valueLabels[get_current_usbmode()]);
+//      if( settings.USB.mode==CFG_USBMODE_AUTODETECT )
+//         print(" (currently %s)", item->valueLabels[get_current_usbmode()]);
     }
   
   return res;
@@ -2252,17 +2251,17 @@ void INFLASHFUN config_show_splash()
 {
   static const char __in_flash(".configmenus") splash[9][80] =
     {"\016lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk\n",
-     "x\017                     VersaTerm 1.0                     \016x", 
+     "x\017                (not so) VersaTerm 1.0                 \016x", 
      "x\017                 (C) 2022 David Hansel                 \016x",
-     "x\017          https://github.com/dhansel/VersaTerm         \016x",
+     "x\017           adapted to Waveshare RP2040 SvenMb          \016x",
+     "x\017          https://github.com/SvenMb/VersaTerm          \016x",
      "tqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqu",
      "x\017  DVI output  via https://github.com/Wren6991/PicoDVI  \016x", 
-     "x\017  VGA output  via https://github.com/Panda381/PicoVGA  \016x", 
      "x\017  USB support via https://github.com/hathach/tinyusb   \016x", 
      "mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj\017"};
 
-  if( settings.Screen.splash!=0 )
-    {
+//  if( settings.Screen.splash!=0 )
+//    {
       menuActive = true;
       framebuf_apply_settings();
       terminal_apply_settings();
@@ -2271,13 +2270,22 @@ void INFLASHFUN config_show_splash()
       int left = framebuf_get_ncols(-1)/2-29;
       print("\033[?25l\033)0\033[%i;1H", top);
       printLines(top, left, 9, splash);
+      if (settings.USB.mode == CFG_USBMODE_HOST)
+        print("USB: host-mode");
+      else
+        print("USB: device-mode");
+      absolute_time_t timeout = make_timeout_time_ms(2000);
+      while( get_absolute_time() < timeout ) {
+        run_tasks(false);
+      }
+
       while( keyboard_num_keypress()==0 && !serial_readable() )
         run_tasks(false);
       
       menuActive = false;
       framebuf_apply_settings();
       terminal_apply_settings();
-    }
+//    }
 }
 
 
@@ -2392,7 +2400,7 @@ bool INFLASHFUN config_load(uint8_t n)
 int INFLASHFUN config_menu()
 {
   uint8_t usbmode = get_current_usbmode();
-  uint8_t displaytype = get_current_displaytype();
+//  uint8_t displaytype = get_current_displaytype();
 
   menuActive = true;
   framebuf_apply_settings();
@@ -2403,15 +2411,15 @@ int INFLASHFUN config_menu()
   while( 1 )
     {
       handleMenu("Settings", mainMenu, NUM_MENU_ITEMS(mainMenu));
-      if( get_current_usbmode() == usbmode && get_current_displaytype()==displaytype )
+      if( get_current_usbmode() == usbmode ) // && get_current_displaytype()==displaytype )
         break;
       else
         {
           print("\033[20;1H");
           if( usbmode != get_current_usbmode() )
             print("\033[4CUSB mode changes (host/device) require a restart to take effect.\n");
-          if( displaytype != get_current_displaytype() )
-            print("\033[4CDisplay mode changes (HDMI/VGA) require a restart to take effect.\n");
+//           if( displaytype != get_current_displaytype() )
+//             print("\033[4CDisplay mode changes (HDMI/VGA) require a restart to take effect.\n");
 
           print("\n\033[4CSave current settings as startup default and restart now (y/n)? ");
 

@@ -149,9 +149,9 @@ int main()
   serial_init();
 
   // initialize USB (needed for keyboard)
-//  if( config_get_usb_mode()==1 )
-//    tud_init(TUD_OPT_RHPORT);
-//  else if( config_get_usb_mode()==2 )
+  if( config_get_usb_mode()==CFG_USBMODE_DEVICE )
+    tud_init(TUD_OPT_RHPORT);
+  else if( config_get_usb_mode()==CFG_USBMODE_HOST )
     tuh_init(TUH_OPT_RHPORT);
 //  else if( config_get_usb_mode()==3 )
 //    {
@@ -172,10 +172,10 @@ int main()
   wait(tuh_inited() ? 1500 : 250);
   
   // if DEFAULTS button and CTRL key is pressed then force DVI
-  if( !gpio_get(PIN_DEFAULTS) )
-    framebuf_init((keyboard_get_current_modifiers() & (KEYBOARD_MODIFIER_LEFTCTRL|KEYBOARD_MODIFIER_RIGHTCTRL))!=0);
-  else
-    {
+//  if( !gpio_get(PIN_DEFAULTS) )
+//     framebuf_init((keyboard_get_current_modifiers() & (KEYBOARD_MODIFIER_LEFTCTRL|KEYBOARD_MODIFIER_RIGHTCTRL))!=0);
+//  else
+//    {
       // check F1-F10 keys for startup config
       while( keyboard_num_keypress()>0 )
         {
@@ -191,12 +191,12 @@ int main()
             }
         }
 
-      framebuf_init(false);
-    }
+      framebuf_init(true);
+ //   }
   
+  config_show_splash();
   terminal_init();
   sound_init();
-  config_show_splash();
 
   while( true ) run_tasks(true);
 }

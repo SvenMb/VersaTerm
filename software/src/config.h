@@ -22,14 +22,14 @@
 
 #include "pico/stdlib.h"
 
-#define CFG_DISPTYPE_AUTODETECT 0
-#define CFG_DISPTYPE_DVI        1
-#define CFG_DISPTYPE_VGA        2
+// #define CFG_DISPTYPE_AUTODETECT 0
+// #define CFG_DISPTYPE_DVI        1
+// #define CFG_DISPTYPE_VGA        2
 
 #define CFG_USBMODE_OFF         0
 #define CFG_USBMODE_DEVICE      1
 #define CFG_USBMODE_HOST        2
-#define CFG_USBMODE_AUTODETECT  3
+// #define CFG_USBMODE_AUTODETECT  3
 
 #define CFG_TTYPE_VT102   0
 #define CFG_TTYPE_VT52    1
