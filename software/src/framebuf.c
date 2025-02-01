@@ -507,24 +507,7 @@ void framebuf_set_screen_inverted(bool invert)
 {
   if( invert != screen_inverted )
     {
-      uint8_t fg, bg;
-      // if( is_dvi )
-      //  {
-          for(uint32_t idx=0; idx<MAX_COLS*MAX_ROWS; idx++)
-            {
-              framebuf_dvi_get_color(idx, &fg, &bg);
-              framebuf_dvi_set_color(idx,  bg,  fg);
-            }
-      //  }
-      //else
-      //  {
-      //    for(uint32_t idx=0; idx<MAX_COLS*MAX_ROWS; idx++)
-      //      {
-      //        framebuf_vga_get_color(idx, &fg, &bg);
-      //        framebuf_vga_set_color(idx,  bg,  fg);
-      //      }
-      //  }
-      
+      framebuf_dvi_invert();
       screen_inverted = invert;
     }
 }
