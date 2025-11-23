@@ -3,4 +3,4 @@
 	url = https://github.com/raspberrypi/pico-sdk.git
 [submodule "software/lib/PicoDVI"]
 	path = software/lib/PicoDVI
-	url = git@github.com:SvenMb/PicoDVI_rp2040_pizero.git
+	url = https://github.com/SvenMb/PicoDVI_rp2040_pizero.git
