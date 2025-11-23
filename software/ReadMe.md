@@ -5,7 +5,7 @@ Uploading firmware to the Raspberry Pi Pico is easy:
 - While holding the button, connect the Raspberry Pi Pico via its micro-USB port to your computer
 - Release the button
 - Your computer should recognize the Pico as a storage device (like a USB stick) and mount it as a drive
-- Copy the [VersaTerm.uf2](software/VersaTerm.uf2) file to the drive mounted in the previous step
+- Copy the [VersaTerm.uf2](VersaTerm.uf2) file to the drive mounted in the previous step
 
 ## Building the VersaTerm firmware from source
 
