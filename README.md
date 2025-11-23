@@ -7,14 +7,19 @@ SvenMb June 2024
 
 ## GPIOs used on the RP2040 PiZero
 
-Buzzer: 9  (needs to be mounted externally)
-Deafults: 10 (needs an external button between the GIO and GND)
-PS/2 keyboard Data: 4
-PS/2 keyboard Clock: 5
-UART TX: 12
-UART RX: 13
-UART CTS: 14
-UART RTS: 15
+| Signal               | Pin |                                                    |
+|----------------------|-----|----------------------------------------------------|
+| Buzzer:              |  9  | (needs to be mounted externally)                   |
+| Defaults:            | 10  | (needs an external button between the GIO and GND) |
+| PS/2 keyboard Data:  |  4  |
+| PS/2 keyboard Clock: |  5  | 
+| UART TX:             | 12  |
+| UART RX:             | 13  |
+| UART CTS:            | 14  | 
+| UART RTS:            | 15  |
+
+---
+Original readme, some parts not for the rp2040-PiZero:
 
 # VersaTerm
 A versatile DIY serial terminal.
