@@ -13,7 +13,7 @@ add_compile_options(-Wall)
 # then rebuild. This is applied via target_compile_definitions on each app
 # individually.
 # set(DVI_DEFAULT_SERIAL_CONFIG "pico_sock_cfg" CACHE STRING
-set(DVI_DEFAULT_SERIAL_CONFIG "pizero_cfg" CACHE STRING
+set(DVI_DEFAULT_SERIAL_CONFIG "waveshare_rp2040_pizero" CACHE STRING
 	"Select a default pin configuration from common_dvi_pin_configs.h")
 
 include_directories(

@@ -23,6 +23,7 @@
 #include "pico/multicore.h"
 #include "hardware/irq.h"
 #include "hardware/vreg.h"
+#include "hardware/clocks.h"
 #include "hardware/structs/bus_ctrl.h"
 #include "dvi.h"
 #include "dvi_serialiser.h"
