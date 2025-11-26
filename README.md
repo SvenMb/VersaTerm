@@ -2,6 +2,7 @@
 
 this fork is specific for the Waveshare RP2040 PiZero, so it removes not needed parts (like VGA and LED blinking), it also fix USB port to host for keyboard.
 
+![Waveshare RP2040 PiZero](/hardware/RP2040_PiZero/RP2040PiZero001.jpg?raw=true "Waveshare RP2040 PiZero")
 SvenMb June 2024
 ---
 
