@@ -1,3 +1,7 @@
+## stay tuned, this would modify the display to 800x480
+
+but currently nothing has happend here
+
 # about this fork
 
 this fork is specific for the Waveshare RP2040 PiZero, so it removes not needed parts (like VGA and LED blinking), it also fix USB port to host for keyboard.
