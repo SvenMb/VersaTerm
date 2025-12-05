@@ -1,6 +1,6 @@
-[submodule "lib/pico-sdk"]
-	path = software/lib/pico-sdk
-	url = https://github.com/raspberrypi/pico-sdk.git
 [submodule "lib/PicoDVI"]
 	path = software/lib/PicoDVI
 	url = https://github.com/SvenMb/PicoDVI_rp2350.git
+[submodule "lib/pico-sdk"]
+	path = software/lib/pico-sdk
+	url = https://github.com/SvenMb/pico-sdk_rp2350_pizero.git
