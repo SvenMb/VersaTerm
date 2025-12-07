@@ -273,6 +273,10 @@ void framebuf_dvi_init(uint8_t *databuf, uint8_t *ra)
   // Run system at TMDS bit clock
   set_sys_clock_khz(DVI_TIMING.bit_clk_khz, true);
 
+#if PICO_PIO_USE_GPIO_BASE
+  pio_set_gpio_base(DVI_DEFAULT_SERIAL_CONFIG.pio,16);
+#endif
+
   charbuf  = (uint16_t *) databuf;
   colorbuf = (uint32_t *) (databuf + 60 * 80 * 2);
   rowattr  = ra;

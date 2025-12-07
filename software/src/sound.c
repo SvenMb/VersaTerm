@@ -28,7 +28,11 @@
 #include "config.h"
 
 #define TIMER_ALARM 0
+#ifdef PICO_RP2350
+#define TIMER_IRQ   TIMER0_IRQ_0
+#else
 #define TIMER_IRQ   TIMER_IRQ_0
+#endif
 
 static uint32_t halfwave_len_us = 100;
 static uint32_t halfwave_count = 0;

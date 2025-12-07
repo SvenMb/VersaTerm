@@ -2252,8 +2252,12 @@ void INFLASHFUN config_show_splash()
   static const char __in_flash(".configmenus") splash[9][80] =
     {"\016lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk\n",
      "x\017                (not so) VersaTerm 1.0                 \016x", 
-     "x\017                 (C) 2022 David Hansel                 \016x",
-     "x\017           adapted to Waveshare RP2040 SvenMb          \016x",
+     "x\017   (C) 2022-25 David Hansel / 2024-25 Sven Muehlberg   \016x",
+#ifdef PICO_RP2350
+     "x\017           adapted to Waveshare RP2350 PiZero          \016x",
+#else
+     "x\017           adapted to Waveshare RP2040 PiZero          \016x",
+#endif
      "x\017          https://github.com/SvenMb/VersaTerm          \016x",
      "tqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqu",
      "x\017  DVI output  via https://github.com/Wren6991/PicoDVI  \016x", 
@@ -2271,9 +2275,9 @@ void INFLASHFUN config_show_splash()
       print("\033[?25l\033)0\033[%i;1H", top);
       printLines(top, left, 9, splash);
       if (settings.USB.mode == CFG_USBMODE_HOST)
-        print("USB: host-mode");
+        print("\n        USB: host-mode");
       else
-        print("USB: device-mode");
+        print("\n        USB: device-mode");
       absolute_time_t timeout = make_timeout_time_ms(2000);
       while( get_absolute_time() < timeout ) {
         run_tasks(false);
