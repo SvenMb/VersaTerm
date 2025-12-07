@@ -5,7 +5,7 @@ Uploading firmware to the Raspberry Pi Pico is easy:
 - While holding the button, connect the Raspberry Pi Pico via its micro-USB port to your computer
 - Release the button
 - Your computer should recognize the Pico as a storage device (like a USB stick) and mount it as a drive
-- Copy the [VersaTerm.uf2](VersaTerm.uf2) file to the drive mounted in the previous step
+- Copy the [VersaTerm_rp2040.uf2](VersaTerm_rp2040.uf2) [VersaTerm_rp2350.uf2](VersaTerm_rp2350.uf2) file to the drive mounted in the previous step
 
 ## Building the VersaTerm firmware from source
 
@@ -24,8 +24,10 @@ git submodule update --init
 cd ../../..
 mkdir build
 cd build
-cmake .. -DPICO_SDK_PATH=../lib/pico-sdk -DPICO_COPY_TO_RAM=1
-make
+# one of the next two
+cmake -DPICO_BOARD=waveshare_rp2040_pizero -DPICO_COPY_TO_RAM=1 .. # for RP2040 PiZero
+cmake -DPICO_BOARD=waveshare_rp2350_pizero ..                      # for RP2350 PiZero
+make -j4
 ```
 
 This should create file VersaTerm/software/build/src/VersaTerm.uf2<br>
@@ -46,23 +48,7 @@ git submodule update --remote --merge
 cd ../..
 git submodule update --remote --merge
 cd ..
-mkdir build
-cd build
-cmake .. -DPICO_SDK_PATH=../lib/pico-sdk -DPICO_COPY_TO_RAM=1
-make
 ```
-
-### TinyUSB updates
-
-The version of TinyUSB currently (May 2022) included with the Pico SDK appears to have problems 
-with USB hubs. These issues seem to be resolved in the latest updates though.
-To update TinyUSB to the latest version, do the following:
-```
-cd VersaTerm/lib/pico-sdk/lib/tinyusb
-git fetch
-git merge origin/master
-```
-Then just "cd" back to VersaTerm/software/build and type "make" to re-build.
 
 ## Some solutions to compile issues
 
