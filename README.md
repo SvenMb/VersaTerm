@@ -1,6 +1,6 @@
 # about this fork
 
-this is not working now!!!!
+this is working now!
 
 this fork is specific for the Waveshare RP2350 PiZero, so it removes not needed parts (like VGA and LED blinking), it also fix USB port to host for keyboard.
 

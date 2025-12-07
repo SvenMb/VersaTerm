@@ -30,7 +30,6 @@ endif()
 
 include_directories(
 	lib/PicoDVI/software/include
-	lib/PicoDVI/software/assets
 	)
 
 add_subdirectory(lib/PicoDVI/software/libdvi)
