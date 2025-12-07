@@ -28,7 +28,7 @@
 #include "config.h"
 
 #define TIMER_ALARM 0
-#define TIMER_IRQ   TIMER_IRQ_0
+#define TIMER_IRQ   TIMER0_IRQ_0
 
 static uint32_t halfwave_len_us = 100;
 static uint32_t halfwave_count = 0;

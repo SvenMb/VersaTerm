@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "pico/bootrom.h"
+// #include "pico/bootrom.h"
 #include "tusb.h"
 #include "framebuf.h"
 #include "serial.h"
@@ -34,10 +34,10 @@
 
 
 // see comment at start of main()
-#define BOOTSEL_TIMEOUT_MS 1500
-static absolute_time_t bootsel_timeout = 0;
-static const uint32_t bootsel_magic[] = {0xf01681de, 0xbd729b29, 0xd359be7a};
-static uint32_t __uninitialized_ram(bootsel_magic_ram)[count_of(bootsel_magic)];
+// #define BOOTSEL_TIMEOUT_MS 1500
+// static absolute_time_t bootsel_timeout = 0;
+// static const uint32_t bootsel_magic[] = {0xf01681de, 0xbd729b29, 0xd359be7a};
+// static uint32_t __uninitialized_ram(bootsel_magic_ram)[count_of(bootsel_magic)];
 static uint16_t ignore_key = HID_KEY_NONE;
 
 
@@ -63,13 +63,13 @@ void run_tasks(bool processInput)
   serial_task(processInput);
 
   // handle bootsel mechanism timeout
-  if( bootsel_timeout>0 && get_absolute_time()>=bootsel_timeout )
-    {
-      bootsel_timeout = 0;
-      for(uint i=0; i<count_of(bootsel_magic); i++) 
-        bootsel_magic_ram[i] = 0;
-    }
-  
+  //if( bootsel_timeout>0 && get_absolute_time()>=bootsel_timeout )
+  //  {
+  //    bootsel_timeout = 0;
+  //    for(uint i=0; i<count_of(bootsel_magic); i++) 
+  //      bootsel_magic_ram[i] = 0;
+  //  }
+
   // process keyboard input
   keyboard_task();
   if( processInput && keyboard_num_keypress()>0 )
@@ -78,7 +78,7 @@ void run_tasks(bool processInput)
       if( key!=ignore_key )
         {
           ignore_key = HID_KEY_NONE;
-
+  
           if( key==HID_KEY_F12 )
             {
               if( config_menu() ) apply_settings();
@@ -124,25 +124,25 @@ int main()
   // library but that library uses a busy wait until the maximum time for the double-tap
   // has expired. Implementing it ourselves here instead allows to use that wait time
   // for initialization.
-  uint i;
-  for(i=0; i<count_of(bootsel_magic) && bootsel_magic_ram[i]==bootsel_magic[i]; i++);
+  /* uint i; */
+  /* for(i=0; i<count_of(bootsel_magic) && bootsel_magic_ram[i]==bootsel_magic[i]; i++); */
 
-  if( i<count_of(bootsel_magic) )
-    {
-      // arm mechanism and set timeout
-      for(i=0; i<count_of(bootsel_magic); i++) 
-        bootsel_magic_ram[i] = bootsel_magic[i];
-      bootsel_timeout = make_timeout_time_ms(BOOTSEL_TIMEOUT_MS);
-    }
-  else
-    {
-      // disarm our mechanism so pressing RESET in boot loader starts up normally
-      for(i=0; i<count_of(bootsel_magic); i++) 
-        bootsel_magic_ram[i] = 0;
+  /* if( i<count_of(bootsel_magic) ) */
+  /*   { */
+  /*     // arm mechanism and set timeout */
+  /*     for(i=0; i<count_of(bootsel_magic); i++)  */
+  /*       bootsel_magic_ram[i] = bootsel_magic[i]; */
+  /*     bootsel_timeout = make_timeout_time_ms(BOOTSEL_TIMEOUT_MS); */
+  /*   } */
+  /* else */
+  /*   { */
+  /*     // disarm our mechanism so pressing RESET in boot loader starts up normally */
+  /*     for(i=0; i<count_of(bootsel_magic); i++)  */
+  /*       bootsel_magic_ram[i] = 0; */
       
-      // boot into boot-loader using GPIO25 (on-board LED) as activity LED
-      reset_usb_boot(1<<25, 0);
-    }
+  /*     // boot into boot-loader using GPIO25 (on-board LED) as activity LED */
+  /*     reset_usb_boot(1<<25, 0); */
+  /*   } */
   
   config_init();
   stdio_uart_init_full(PIN_UART_ID, 300, PIN_UART_TX, PIN_UART_RX);
@@ -185,7 +185,7 @@ int main()
               // apply settings (may have changed)
               keyboard_apply_settings();
               serial_apply_settings();
-              // ignore further repeats of Fx key 
+              // ignore further repeats of Fx key
               ignore_key = c;
               break;
             }
