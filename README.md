@@ -2,12 +2,12 @@
 
 this is working now!
 
-this fork is specific for the Waveshare RP2350 PiZero, so it removes not needed parts (like VGA and LED blinking), it also fix USB port to host for keyboard.
+this fork is specific for the Waveshare RP2350/RP2040 PiZero, so it removes not needed parts (like VGA and LED blinking), it also fix USB port to host for keyboard.
 
 SvenMb Dezember 2025
 ---
 
-## GPIOs used on the RP2040 PiZero
+## GPIOs used on the RP2350/RP2040 PiZero
 
 | Signal               | Pin |                                                    |
 |----------------------|-----|----------------------------------------------------|
@@ -21,7 +21,7 @@ SvenMb Dezember 2025
 | UART RTS:            | 15  |
 
 ---
-Original readme, some parts not for the rp2040-PiZero:
+Original readme, some parts not for the waveshare PiZero boards:
 
 # VersaTerm
 A versatile DIY serial terminal.
