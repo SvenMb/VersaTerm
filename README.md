@@ -1,3 +1,5 @@
+trying to implement pio usb to use hid and device-cdc together.... 
+
 # about this fork
 
 this fork is specific for the Waveshare RP2350/RP2040 PiZero, so it removes not needed parts (like VGA and LED blinking), it also fix USB port to host for keyboard.
