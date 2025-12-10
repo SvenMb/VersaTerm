@@ -20,6 +20,7 @@
 #include "framebuf.h"
 #include "terminal.h"
 #include "keyboard.h"
+#include "keyboard_usb.h"
 #include "serial.h"
 #include "config.h"
 #include "font.h"
@@ -2275,7 +2276,7 @@ void INFLASHFUN config_show_splash()
       print("\033[?25l\033)0\033[%i;1H", top);
       printLines(top, left, 9, splash);
       if (settings.USB.mode == CFG_USBMODE_HOST)
-        print("\n        USB: host-mode");
+        print("\n        USB: host-mode KBD-addr: 0x%02x", keyboard_usb_status());
       else
         print("\n        USB: device-mode");
       absolute_time_t timeout = make_timeout_time_ms(2000);

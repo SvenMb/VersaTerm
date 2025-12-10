@@ -53,6 +53,10 @@ static uint8_t keyboard_repeat_key = 0;
 static absolute_time_t keyboard_repeat_timeout = 0;
 static uint8_t s_leds, keyboard_dev_addr = 0xFF, keyboard_instance = 0xFF;
 
+uint8_t keyboard_usb_status()
+{
+  return keyboard_dev_addr;
+}
 
 void keyboard_usb_set_led_status(uint8_t leds)
 {

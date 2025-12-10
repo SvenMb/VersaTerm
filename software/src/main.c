@@ -195,6 +195,7 @@ int main()
  //   }
   
   config_show_splash();
+  wait(2000);
   terminal_init();
   sound_init();
 

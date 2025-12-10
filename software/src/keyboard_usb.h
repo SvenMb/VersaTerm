@@ -24,5 +24,5 @@ void keyboard_usb_set_led_status(uint8_t leds);
 void keyboard_usb_init();
 void keyboard_usb_task();
 void keyboard_usb_apply_settings();
-
+uint8_t keyboard_usb_status();
 #endif
